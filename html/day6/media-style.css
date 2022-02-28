@@ -1,0 +1,14 @@
+.heading{
+    color:blue;
+}
+.sub-heading{
+    color:green;
+}
+@media(max-width:400px){
+    .heading{
+        color:red;
+    }
+    .sub-heading{
+        color: violet;
+    }
+}

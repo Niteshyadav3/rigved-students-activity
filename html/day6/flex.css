@@ -1,0 +1,21 @@
+.container{
+    display:flex;
+}
+.item1{
+    background-color: darkgoldenrod;
+    border: 2px solid black;
+    flex-grow: 1;
+}
+.item2{
+    background-color: cadetblue;
+    border: 2px solid black;
+    
+}
+.item3{
+    background-color: coral;
+    border: 2px solid black;
+    
+}
+.container > div {
+    padding:5px;
+}
