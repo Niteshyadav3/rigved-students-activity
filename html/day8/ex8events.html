@@ -7,13 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Even numbers</h2>
+    <h2 onmouseover="test(event)">Event Demo!</h2>
+    <h3 onmouseover="test(event)">This is an h3 tag</h3>
+    <button onclick="test(event)">Button1</button>
     <script type="text/javascript">
-        var x;
-        for(var x=2;x<=10;x+=2)
-            {document.write("x = "+x+"<br />");
+        function test(e){
+            console.log(e);
+            console.log(e.target);
+            e.target.innerHtml='hello world'
         }
-
     </script>
 </body>
 </html>

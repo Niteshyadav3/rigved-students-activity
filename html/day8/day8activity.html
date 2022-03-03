@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration From!</h1>
+    <form name="reg" action="ex1loops.html" method="post" onsubmit="return validateRegistration()">
+    
+    <label>
+        FirstName <input type = "text" name = "fn" autocomplete="off">
+    </label>
+    <br />
+    <label>
+        LastName <input type = "text" name = "ln" autocomplete="off">
+    </label>
+    <br />
+    <label>
+        Password <input type = "password" name = "pw">
+        ConfirmPassword <input type = "password" name = "cpw">
+    </label>
+    <br />
+    <label>
+        Gender <input type = "radio" name = "gender" value = "M"> MALE
+                <input type = "radio" name = "gender" value = "F"> FEMALE
+    </label>
+    <br />
+    <label>
+        Skills <input type = "checkbox" name = "tech" value = "JS">Javascript
+                <input type = "checkbox" name = "tech" value = "HTML">HTML
+                <input type = "checkbox" name = "tech" value = "Angular">Angular
+    </label>
+    <br />
+    <label>
+        <input type = "submit" value = "submit">
+        <input type = "reset" value = "Reset">
+    </label>
+    
+    </form>
+    
+    <script type="text/javascript" src="day8activityscripts.js"></script>
+</body>
+</html>
