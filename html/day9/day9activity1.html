@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h2>Calculator</h2> 
+   <form name="entry">
+       <p>Input1 <input type="text" name="t1"</p>
+       <p>Input2 <input type="text" name="t2"</p>
+
+       <p>Result <input type="text" name="res"</p>
+
+    <p><input type="button" value="Add +" onclick="sum()">
+    <input type="button" value="Sub -" onclick="sub()">
+    <input type="button" value="Mul *" onclick="mul()">
+    <input type="button" value="Div /" onclick="div()"></p>
+   </form>
+   <script type="text/javascript">
+       function sum(){
+           var a,b,c
+           a=parseInt(entry.t1.value)
+           b=parseInt(entry.t2.value)
+           c=a+b
+           entry.res.value=c
+       }
+       function sub(){
+           var a,b,c
+           a=parseInt(entry.t1.value)
+           b=parseInt(entry.t2.value)
+           c=a-b
+           entry.res.value=c
+       }
+       function mul(){
+           var a,b,c
+           a=parseInt(entry.t1.value)
+           b=parseInt(entry.t2.value)
+           c=a*b
+           entry.res.value=c
+       }
+       function div(){
+           var a,b,c
+           a=parseFloat(entry.t1.value)
+           b=parseFloat(entry.t2.value)
+           c=a/b
+           entry.res.value=c
+       }
+
+   </script>
+</body>
+</html>

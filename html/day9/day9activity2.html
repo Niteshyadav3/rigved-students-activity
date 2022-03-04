@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        
+        function generateOTP1(inp){
+            var inp=prompt("Enter number for OTP")
+            alert("Enter 4 or 6 for otp")
+            var digits='0123456789';
+            let OTP= '';
+            for(let i=0;i<4;i++){
+                OTP+=digits[Math.floor(Math.random()*10)];
+                
+            }
+            return OTP;
+        }
+       
+        function generateOTP2(){
+            var digits='0123456789';
+            let OTP= '';
+            for(let i=0;i<6;i++){
+                OTP+=digits[Math.floor(Math.random()*10)];
+            }
+            return OTP;
+        }
+       
+        document.write('OTP of 4 digits:')
+        document.write(generateOTP1());
+        
+        document.write('OTP of 6 digits:')
+        document.write(generateOTP2());
+    </script>
+</body>
+</html>
