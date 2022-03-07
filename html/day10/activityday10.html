@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Table Arrays</h2>
+    <script type="text/javascript">
+        var emps=[
+            {CustomerId:12345,Fullname:'Sachin Tendulkar',Address:{State:'Maharastra',City:'Mumbai'}},
+            {CustomerId:28845,Fullname:'Rahul Dravid',Address:{State:'Karnataka',City:'Bangalore'}},
+            {CustomerId:42446,Fullname:'Rohit Sharma',Address:{State:'Maharastra',City:'Pune'}},
+        ];
+        for(var i=0; i<emps.length;i++){
+            document.write('<p>CustomerId:'+emps[i].CustomerId+',Fullname:'+emps[i].Fullname+',State:'+emps[i].Address.State+',City:'+emps[i].Address.City+'</p>');
+           
+        }
+    </script>
+</body>
+</html>
