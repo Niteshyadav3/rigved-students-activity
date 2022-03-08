@@ -4,61 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Activity</title>
-    <style type="text/css">
-        div {
-            display: inline-block; border: 2px solid black; width: 880px; height: 880px;
-        }
-        h2 {text-align: center;}
-        canvas {border: solid 2px black; margin: 2%;}
-    </style>
+    <title>Document</title>
 </head>
 <body>
-    <canvas id="chessBoard" width="800" height="500" ></canvas>
-
+    <canvas id="c1" width="400" height="400" style="border:2px solid"></canvas>
+    <canvas id="c2" width="400" height="400"></canvas>
     <script type="text/javascript">
-var squareSize;
-const numOfRows = 8;
-const numOfcols = 8;
-var numOfsquare;
-
-var xValue = 0;
-var yValue = 0;
-
-var canvas, ctx
-
-window.onload
-    canvas = document.getElementById("chessBoard");
-    ctx = canvas.getContext("2d");
-    squareSize = canvas.height / numOfRows;
-    numOfsquare = numOfRows * numOfcols;
-
-    console.log("Size of each square = " + squareSize +"px");
-
-    drawBoard(canvas, numOfRows, numOfcols);
-
-
-function drawBoard(can, nRow, nCol) {
-    var ctx = can.getContext("2d");
-    var w = can.width;
-    var h = can.height;
-
-    nRow = nRow || 12;    
-    nCol = nCol || 12;    
-
-    w /= nCol;            
-    h /= nRow;           
-
-    for (var i = 0; i < nRow; ++i) {
-        for (var j = 0, col = nCol / 2; j < col; ++j) {
-            ctx.rect(2 * j * w + (i % 2 ? 0 : w), i * h, w, h);
+        //creating the chess board
+        var ctx1=document.getElementById('c1').getContext('2d');
+        for(var x=0;x<8;x++){
+            for(var y=0;y<8;y++){
+                if((x+y)%2==0){
+                    ctx1.fillStyle='black';
+                    ctx1.fillRect(x*50,y*50,50,50);
+                }
+            }
         }
-    }
-
-    ctx.fill();
-}
-
+        var ctx2=document.getElementById('c2').getContext('2d');
+        var colors=['violet','indigo','blue','green','yellow','orange','red','white'];
+        var radius=200;
+        for(var i=0; i<colors.length;i++){
+            ctx2.beginPath();
+            ctx2.fillStyle=colors[i];
+            ctx2.arc(200,200,radius,0,Math.PI,true);
+            ctx2.fill();
+            radius=radius-20;
+        }
     </script>
-
 </body>
 </html>

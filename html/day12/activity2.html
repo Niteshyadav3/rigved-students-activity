@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div>
+    <h2>Employment Form</h2>
+    <form name="form1">
+    <label>Enter Name: <input type="text" name="names" id="n1" autocomplete="off"></label><br><br>
+    <label>Enter  Age: <input type="text" name="age" id="a1" autocomplete="off"></label> <div id="d1"></div><br><br>
+    <button type="submit" onclick="eventHandle()">Submit</button><br><br>
+    <div id="d1" style="color: brown;"></div>
+</form>
+    
+    <script type="text/javascript">
+        function eventHandle() {
+        var age = parseInt(document.forms.a1.value);
+        try {
+            if(age < 18 || age > 60) {
+                throw "To work here, Your age must be between 18 and 60!"
+            }
+            document.getElementById('d1').inerHTML ="<p>Age: "+age+"</p>";
+        } catch(error) {
+            alert(error);
+            eventHandle();
+        } finally {
+            alert('You May Work')
+        }
+        document.getElementById('d1').inerHTML ="<h2 Welcome!</h2>";
+        }
+      eventHandle();
+
+        
+    </script>
+</div>
+</body>
+</html>
