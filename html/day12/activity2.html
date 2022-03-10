@@ -7,36 +7,33 @@
     <title>Document</title>
 </head>
 <body>
-    
-<div>
-    <h2>Employment Form</h2>
-    <form name="form1">
-    <label>Enter Name: <input type="text" name="names" id="n1" autocomplete="off"></label><br><br>
-    <label>Enter  Age: <input type="text" name="age" id="a1" autocomplete="off"></label> <div id="d1"></div><br><br>
-    <button type="submit" onclick="eventHandle()">Submit</button><br><br>
-    <div id="d1" style="color: brown;"></div>
-</form>
-    
-    <script type="text/javascript">
-        function eventHandle() {
-        var age = parseInt(document.forms.a1.value);
-        try {
-            if(age < 18 || age > 60) {
-                throw "To work here, Your age must be between 18 and 60!"
-            }
-            document.getElementById('d1').inerHTML ="<p>Age: "+age+"</p>";
-        } catch(error) {
-            alert(error);
-            eventHandle();
-        } finally {
-            alert('You May Work')
-        }
-        document.getElementById('d1').inerHTML ="<h2 Welcome!</h2>";
-        }
-      eventHandle();
+   <h2>Employee age</h2> 
+   <p>enter your age</p>
+   <input id="age" type="text">
+   <button type="button" onclick="myFunction()">test input</button>
+   <p id="p01"></p>
 
-        
-    </script>
-</div>
+   <script>
+    function myFunction(){
+           const message=document.getElementById('p01');
+           message.innerHTML='';
+           let xy=document.getElementById('age').value;
+           try{
+               if(xy=='')
+               throw 'is not entetred';
+               if(isNaN(xy))
+               throw 'can only a number';
+               xy=Number(xy);
+               if(xy<18)
+               throw 'you are underage';
+               if(xy>60)
+               throw 'your are overage';
+           }
+           catch(err){
+               mesaage.innerHTML='Age'+err;
+           }
+       }
+   </script>
+
 </body>
 </html>
