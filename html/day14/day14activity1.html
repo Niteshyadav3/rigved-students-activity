@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            background-color: rgb(222,200,200); font-family: 'Courier New', Courier, monospace;
+        }
+        table{
+            border:outset burlywood;padding: 1%;background-color: rgba(0,0,233,0.219);
+        }
+        td,th{
+            padding: 8px 15px 8px 15px;
+        }
+        h1{
+            padding: 1% 10%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Data Table </h2>
+    <script type="text/javascript">
+        let users=[
+            {name:'Alex',age:35,address:{state:'KA',city:'BLR'}},
+            {name:'Bruce',age:'45'},
+            {name:'Charles',age:25,address:{state:'MAH',city:'MBI'}},
+            {name:'David',age:'49'},
+            {name:'Edward',age:33,address:{state:'TN',city:'CHH'}}
+        ];
+        document.write(`<table border='2'  >
+                <thead><tr><th>Name</th><th>Age</th><th>State</th><th>City</th></tr></thead>`)
+        for (let i=0;i<users.length;i++){
+            document.write(`<p><tr><td>Name:${users[i]?.name}</td><td>Age:${users[i]?.age}</td>
+                <td>State:${users[i]?.address?.state}</td><td>City:${users[i]?.address?.city}</td></tr></p>`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>OTP</h2>
+    <button onclick="randomNumber();">6 digits otp generate</button>
+    <p id="otp"></p>
+    <script type="text/javascript">
+        function randomNumber(){
+            var a=Math.random()
+            var digit=a*10**6;
+            var int1=parseInt(digit);
+            var str=String(int1);
+            var otp=str.padStart(6,'0');
+            document.getElementById('otp').innerHTML=otp
+        }
+    </script>
+</body>
+</html>
