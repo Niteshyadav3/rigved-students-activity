@@ -1,0 +1,394 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.04 sec)
+
+mysql> create database rigved_db;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rigved_db          |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use rigved_db;
+Database changed
+mysql> show tables;
+Empty set (0.06 sec)
+
+mysql> create table t1(sno int,tname varchar(10));
+Query OK, 0 rows affected (0.56 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_rigved_db |
++---------------------+
+| t1                  |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> create table t2(tno int primary key,tname varchar(10));
+Query OK, 0 rows affected (0.97 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_rigved_db |
++---------------------+
+| t1                  |
+| t2                  |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc t1;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sno   | int         | YES  |     | NULL    |       |
+| tname | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.06 sec)
+
+mysql> desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tno   | int         | NO   | PRI | NULL    |       |
+| tname | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into t2 values(100,'nitesh');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from t2;
++-----+--------+
+| tno | tname  |
++-----+--------+
+| 100 | nitesh |
++-----+--------+
+1 row in set (0.11 sec)
+
+mysql> select tno from t2;
++-----+
+| tno |
++-----+
+| 100 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> insert into t2 values(200,'bruce');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into t2 values(300,'charles');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> select * from t2;
++-----+---------+
+| tno | tname   |
++-----+---------+
+| 100 | nitesh  |
+| 200 | bruce   |
+| 300 | charles |
++-----+---------+
+3 rows in set (0.00 sec)
+
+mysql> insert into t2 values(200,'dravid');
+ERROR 1062 (23000): Duplicate entry '200' for key 't2.PRIMARY'
+mysql> desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tno   | int         | NO   | PRI | NULL    |       |
+| tname | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.10 sec)
+
+mysql> alter table t2 add column tx int;
+Query OK, 0 rows affected (1.72 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc t2;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tno   | int         | NO   | PRI | NULL    |       |
+| tname | varchar(10) | YES  |     | NULL    |       |
+| tx    | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.06 sec)
+
+mysql> select  * from t2;
++-----+---------+------+
+| tno | tname   | tx   |
++-----+---------+------+
+| 100 | nitesh  | NULL |
+| 200 | bruce   | NULL |
+| 300 | charles | NULL |
++-----+---------+------+
+3 rows in set (0.00 sec)
+
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int check(age>18&<60),employee_email unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '<60),employee_email unique)' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int check(age>18),employee_email constraint unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'constraint unique)' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int check(age>18),employee_email not null unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null unique)' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int check(age>18),employee_email  unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique)' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int check(age>18),employee_email unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'unique)' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int ,employee_email );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null,employee_age int ,employee_email;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table employee(employee_id int primary key,employee_name varchar(10) not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table employees(employee_id int primary key,emp_name char(15),age int(2),email varchar(30));
+Query OK, 0 rows affected, 1 warning (1.13 sec)
+
+mysql> show tables;
++---------------------+
+| Tables_in_rigved_db |
++---------------------+
+| employees           |
+| t1                  |
+| t2                  |
++---------------------+
+3 rows in set (0.11 sec)
+
+mysql> desc employees;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employee_id | int         | NO   | PRI | NULL    |       |
+| emp_name    | char(15)    | YES  |     | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| email       | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> insert into employees values(100,'nitesh',23,yadavnitesh060898@gmail.com);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@gmail.com)' at line 1
+mysql> insert into employees values(100,'nitesh',23,yadavnitesh060898@email.com);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@email.com)' at line 1
+mysql> alter table employees add constraint unique(email);
+Query OK, 0 rows affected (0.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees
+    -> add check(age>18);
+Query OK, 0 rows affected (1.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into employees values(100,'nitesh',23,yadavnitesh060898@email.com);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@email.com)' at line 1
+mysql> desc employees;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employee_id | int         | NO   | PRI | NULL    |       |
+| emp_name    | char(15)    | YES  |     | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| email       | varchar(30) | YES  | UNI | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.03 sec)
+
+mysql> insert into employees values(100,'nitesh',23,'yadavnitesh060898@email.com');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+
+| employee_id | emp_name | age  | email                       |
++-------------+----------+------+-----------------------------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |
++-------------+----------+------+-----------------------------+
+1 row in set (0.11 sec)
+
+mysql> insert into employees values(101,'nilesh',23,'yadavnilesh0608@gmail.com');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employees values(102,'karan',22,'karan1603@gmail.com');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> insert into employees values(103,'harkeet',20,'harkeet78@gmail.com');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+
+| employee_id | emp_name | age  | email                       |
++-------------+----------+------+-----------------------------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |
+|         102 | karan    |   22 | karan1603@gmail.com         |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |
++-------------+----------+------+-----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employees values(104,'nitesh',2,'yadavsujal34@email.com');
+ERROR 3819 (HY000): Check constraint 'employees_chk_1' is violated.
+mysql> insert into employees values(105,'nitin',26,'yadavnitesh060898@email.com');
+ERROR 1062 (23000): Duplicate entry 'yadavnitesh060898@email.com' for key 'employees.email'
+mysql> alter table employees add column aadhar card int(12);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'card int(12)' at line 1
+mysql> alter table employees add column aadhar int(12);
+Query OK, 0 rows affected, 1 warning (0.71 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+--------+
+| employee_id | emp_name | age  | email                       | aadhar |
++-------------+----------+------+-----------------------------+--------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |   NULL |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |   NULL |
+|         102 | karan    |   22 | karan1603@gmail.com         |   NULL |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |   NULL |
++-------------+----------+------+-----------------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employees add column pancard varchar(10);
+Query OK, 0 rows affected (0.28 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+--------+---------+
+| employee_id | emp_name | age  | email                       | aadhar | pancard |
++-------------+----------+------+-----------------------------+--------+---------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |   NULL | NULL    |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |   NULL | NULL    |
+|         102 | karan    |   22 | karan1603@gmail.com         |   NULL | NULL    |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |   NULL | NULL    |
++-------------+----------+------+-----------------------------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employees add constraint unique(aadhar);
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employees add constraint unique(pancard);
+Query OK, 0 rows affected (0.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employee_id | int         | NO   | PRI | NULL    |       |
+| emp_name    | char(15)    | YES  |     | NULL    |       |
+| age         | int         | YES  |     | NULL    |       |
+| email       | varchar(30) | YES  | UNI | NULL    |       |
+| aadhar      | int         | YES  | UNI | NULL    |       |
+| pancard     | varchar(10) | YES  | UNI | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into employees values(104,'nitya',26,'yadav060898@email.com',932445284768,AOZPT1234);
+ERROR 1054 (42S22): Unknown column 'AOZPT1234' in 'field list'
+mysql> insert into employees values(104,'nitya',26,'yadav060898@email.com',932445284768,AOZPRERT);
+ERROR 1054 (42S22): Unknown column 'AOZPRERT' in 'field list'
+mysql> insert into employees values(104,'nitya',26,'yadav060898@email.com',932445284768,'AOZPRERT');
+ERROR 1264 (22003): Out of range value for column 'aadhar' at row 1
+mysql> insert into employees values(104,'nitya',26,'yadav060898@email.com',93244528479,'AOZPRERT');
+ERROR 1264 (22003): Out of range value for column 'aadhar' at row 1
+mysql> insert into employees values(104,'nitya',26,'yadav060898@email.com',9324452,'AOZPRERT');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+---------+----------+
+| employee_id | emp_name | age  | email                       | aadhar  | pancard  |
++-------------+----------+------+-----------------------------+---------+----------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |    NULL | NULL     |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |    NULL | NULL     |
+|         102 | karan    |   22 | karan1603@gmail.com         |    NULL | NULL     |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |    NULL | NULL     |
+|         104 | nitya    |   26 | yadav060898@email.com       | 9324452 | AOZPRERT |
++-------------+----------+------+-----------------------------+---------+----------+
+5 rows in set (0.12 sec)
+
+mysql> insert into employees values(105,'nit',56,'yadav98@email.com',932445284768,AOZPT1234);
+ERROR 1054 (42S22): Unknown column 'AOZPT1234' in 'field list'
+mysql> insert into employees values(105,'nit',56,'yadav98@email.com',93244528,'AOZPT1234');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> insert into employees values(106,'nita',50,'yadav12398@email.com',93244528,'AOZPT1234');
+ERROR 1062 (23000): Duplicate entry '93244528' for key 'employees.aadhar'
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+----------+-----------+
+| employee_id | emp_name | age  | email                       | aadhar   | pancard   |
++-------------+----------+------+-----------------------------+----------+-----------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |     NULL | NULL      |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |     NULL | NULL      |
+|         102 | karan    |   22 | karan1603@gmail.com         |     NULL | NULL      |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |     NULL | NULL      |
+|         104 | nitya    |   26 | yadav060898@email.com       |  9324452 | AOZPRERT  |
+|         105 | nit      |   56 | yadav98@email.com           | 93244528 | AOZPT1234 |
++-------------+----------+------+-----------------------------+----------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table employees
+    -> drop column pancard;
+Query OK, 0 rows affected (2.54 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+----------+
+| employee_id | emp_name | age  | email                       | aadhar   |
++-------------+----------+------+-----------------------------+----------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |     NULL |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |     NULL |
+|         102 | karan    |   22 | karan1603@gmail.com         |     NULL |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |     NULL |
+|         104 | nitya    |   26 | yadav060898@email.com       |  9324452 |
+|         105 | nit      |   56 | yadav98@email.com           | 93244528 |
++-------------+----------+------+-----------------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table employees
+    -> drop column aadhar;
+Query OK, 0 rows affected (1.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-------------+----------+------+-----------------------------+
+| employee_id | emp_name | age  | email                       |
++-------------+----------+------+-----------------------------+
+|         100 | nitesh   |   23 | yadavnitesh060898@email.com |
+|         101 | nilesh   |   23 | yadavnilesh0608@gmail.com   |
+|         102 | karan    |   22 | karan1603@gmail.com         |
+|         103 | harkeet  |   20 | harkeet78@gmail.com         |
+|         104 | nitya    |   26 | yadav060898@email.com       |
+|         105 | nit      |   56 | yadav98@email.com           |
++-------------+----------+------+-----------------------------+
+6 rows in set (0.00 sec)
+
+mysql> drop table employees;
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> select * from employees;
