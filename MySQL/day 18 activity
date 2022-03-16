@@ -1,0 +1,182 @@
+mysql> create table Student(RollNo int primary key auto_increment,Name varchar(15),Age int);
+Query OK, 0 rows affected (0.46 sec)
+
+mysql> desc Student;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| RollNo | int         | NO   | PRI | NULL    | auto_increment |
+| Name   | varchar(15) | YES  |     | NULL    |                |
+| Age    | int         | YES  |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.03 sec)
+
+mysql> insert into Student values(1,'Raj',20);
+Query OK, 1 row affected (0.15 sec)
+
+mysql> insert into Student values(2,'Ramesh',20);
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into Student values(3,'Ravi',21);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> insert into Student values(4,'Suraj',22);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from Student;
++--------+--------+------+
+| RollNo | Name   | Age  |
++--------+--------+------+
+|      1 | Raj    |   20 |
+|      2 | Ramesh |   20 |
+|      3 | Ravi   |   21 |
+|      4 | Suraj  |   22 |
++--------+--------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table Marks(Mid int primary key,Physics int,Maths int,Chemistry int,Student_RollNo int,foreign key(Student_RollNo)references Student(RollNo));
+Query OK, 0 rows affected (1.18 sec)
+
+mysql> desc Marks;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| Mid            | int  | NO   | PRI | NULL    |       |
+| Physics        | int  | YES  |     | NULL    |       |
+| Maths          | int  | YES  |     | NULL    |       |
+| Chemistry      | int  | YES  |     | NULL    |       |
+| Student_RollNo | int  | YES  | MUL | NULL    |       |
++----------------+------+------+-----+---------+-------+
+5 rows in set (0.04 sec)
+
+mysql> insert into Marks values(11,70,80,70,2);
+Query OK, 1 row affected (0.20 sec)
+
+mysql> select * from Marks;
++-----+---------+-------+-----------+----------------+
+| Mid | Physics | Maths | Chemistry | Student_RollNo |
++-----+---------+-------+-----------+----------------+
+|  11 |      70 |    80 |        70 |              2 |
++-----+---------+-------+-----------+----------------+
+1 row in set (0.00 sec)
+
+mysql> insert into Marks values(22,80,80,80,1);
+Query OK, 1 row affected (0.20 sec)
+
+mysql> insert into Marks values(33,90,90,70,3);
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into Marks values(44,88,88,77,4);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> select * from Marks;
++-----+---------+-------+-----------+----------------+
+| Mid | Physics | Maths | Chemistry | Student_RollNo |
++-----+---------+-------+-----------+----------------+
+|  11 |      70 |    80 |        70 |              2 |
+|  22 |      80 |    80 |        80 |              1 |
+|  33 |      90 |    90 |        70 |              3 |
+|  44 |      88 |    88 |        77 |              4 |
++-----+---------+-------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Student;
++--------+--------+------+
+| RollNo | Name   | Age  |
++--------+--------+------+
+|      1 | Raj    |   20 |
+|      2 | Ramesh |   20 |
+|      3 | Ravi   |   21 |
+|      4 | Suraj  |   22 |
++--------+--------+------+
+4 rows in set (0.11 sec)
+
+mysql> select M.Mid,M.Physics,M.Maths,M.Chemistry,S.Rollno,S.Name from Marks inner join Student on Marks.RollNo=Marks.RollNo;
+ERROR 1054 (42S22): Unknown column 'M.Mid' in 'field list'
+mysql> select M.Physics,M.Maths,M.Chemistry,S.Rollno,S.Name from Marks inner join Student on Marks.RollNo=Marks.RollNo;
+ERROR 1054 (42S22): Unknown column 'M.Physics' in 'field list'
+mysql> select m.mid,m.Physics,m.Maths,m.Chemistry,s.Rollno,s.Name from Marks inner join Student on Marks.RollNo=Marks.RollNo;
+ERROR 1054 (42S22): Unknown column 'm.mid' in 'field list'
+mysql> select mid,Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Marks.RollNo=Marks.RollNo;
+ERROR 1054 (42S22): Unknown column 'Marks.RollNo' in 'on clause'
+mysql> select mid,Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Student_RollNo=Student_RollNo;
++-----+---------+-------+-----------+--------+--------+
+| mid | Physics | Maths | Chemistry | Rollno | Name   |
++-----+---------+-------+-----------+--------+--------+
+|  44 |      88 |    88 |        77 |      1 | Raj    |
+|  33 |      90 |    90 |        70 |      1 | Raj    |
+|  22 |      80 |    80 |        80 |      1 | Raj    |
+|  11 |      70 |    80 |        70 |      1 | Raj    |
+|  44 |      88 |    88 |        77 |      2 | Ramesh |
+|  33 |      90 |    90 |        70 |      2 | Ramesh |
+|  22 |      80 |    80 |        80 |      2 | Ramesh |
+|  11 |      70 |    80 |        70 |      2 | Ramesh |
+|  44 |      88 |    88 |        77 |      3 | Ravi   |
+|  33 |      90 |    90 |        70 |      3 | Ravi   |
+|  22 |      80 |    80 |        80 |      3 | Ravi   |
+|  11 |      70 |    80 |        70 |      3 | Ravi   |
+|  44 |      88 |    88 |        77 |      4 | Suraj  |
+|  33 |      90 |    90 |        70 |      4 | Suraj  |
+|  22 |      80 |    80 |        80 |      4 | Suraj  |
+|  11 |      70 |    80 |        70 |      4 | Suraj  |
++-----+---------+-------+-----------+--------+--------+
+16 rows in set (0.00 sec)
+
+mysql> select mid,Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Student_RollNo=Student.Student_RollNo;
+ERROR 1054 (42S22): Unknown column 'Student.Student_RollNo' in 'on clause'
+mysql> select mid,Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Student_RollNo=Student_RollNo.Student_RollNo;
+ERROR 1054 (42S22): Unknown column 'Student_RollNo.Student_RollNo' in 'on clause'
+mysql> select mid,Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Student_RollNo=Student.RollNo;
++-----+---------+-------+-----------+--------+--------+
+| mid | Physics | Maths | Chemistry | Rollno | Name   |
++-----+---------+-------+-----------+--------+--------+
+|  11 |      70 |    80 |        70 |      2 | Ramesh |
+|  22 |      80 |    80 |        80 |      1 | Raj    |
+|  33 |      90 |    90 |        70 |      3 | Ravi   |
+|  44 |      88 |    88 |        77 |      4 | Suraj  |
++-----+---------+-------+-----------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select Physics,Maths,Chemistry,Rollno,Name from Marks inner join Student on Student_RollNo=Student.RollNo;
++---------+-------+-----------+--------+--------+
+| Physics | Maths | Chemistry | Rollno | Name   |
++---------+-------+-----------+--------+--------+
+|      70 |    80 |        70 |      2 | Ramesh |
+|      80 |    80 |        80 |      1 | Raj    |
+|      90 |    90 |        70 |      3 | Ravi   |
+|      88 |    88 |        77 |      4 | Suraj  |
++---------+-------+-----------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+
+| rollno | name   | physics | maths | chemistry |
++--------+--------+---------+-------+-----------+
+|      1 | Raj    |      80 |    80 |        80 |
+|      2 | Ramesh |      70 |    80 |        70 |
+|      3 | Ravi   |      90 |    90 |        70 |
+|      4 | Suraj  |      88 |    88 |        77 |
++--------+--------+---------+-------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry)total from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+-------+
+| rollno | name   | physics | maths | chemistry | total |
++--------+--------+---------+-------+-----------+-------+
+|      1 | Raj    |      80 |    80 |        80 |   240 |
+|      2 | Ramesh |      70 |    80 |        70 |   220 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |
++--------+--------+---------+-------+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select s.rollno,s.name,m.physics,m.maths,m.chemistry,(physics+maths+chemistry)total,round((physics+maths+chemistry)/3,2)average from student s inner join marks m on m.student_rollno=s.rollno;
++--------+--------+---------+-------+-----------+-------+---------+
+| rollno | name   | physics | maths | chemistry | total | average |
++--------+--------+---------+-------+-----------+-------+---------+
+|      1 | Raj    |      80 |    80 |        80 |   240 |   80.00 |
+|      2 | Ramesh |      70 |    80 |        70 |   220 |   73.33 |
+|      3 | Ravi   |      90 |    90 |        70 |   250 |   83.33 |
+|      4 | Suraj  |      88 |    88 |        77 |   253 |   84.33 |
++--------+--------+---------+-------+-----------+-------+---------+
+4 rows in set (0.00 sec)
