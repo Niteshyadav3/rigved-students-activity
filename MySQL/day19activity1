@@ -1,0 +1,96 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| rigved_db          |
+| sys                |
++--------------------+
+5 rows in set (0.47 sec)
+
+mysql> use rigved_db;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_rigved_db |
++---------------------+
+| dept                |
+| emp                 |
+| employee            |
+| marks               |
+| product             |
+| product_history     |
+| student             |
+| t1                  |
+| t2                  |
+| t3                  |
+| t4                  |
+| user                |
++---------------------+
+12 rows in set (1.02 sec)
+
+mysql> delimiter $$
+mysql> create table person(Id int primary key,Name varchar(20),Gender varchar(10)$$
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table person(Id int primary key,Name varchar(20),Gender varchar(10))$$
+Query OK, 0 rows affected (1.59 sec)
+
+mysql> select * from person$$
+Empty set (0.11 sec)
+
+mysql> insert into person values(10,'Nitesh','Male'),(11,'ashu','Female')$$
+Query OK, 2 rows affected (0.29 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from person$$
++----+--------+--------+
+| Id | Name   | Gender |
++----+--------+--------+
+| 10 | Nitesh | Male   |
+| 11 | ashu   | Female |
++----+--------+--------+
+2 rows in set (0.00 sec)
+
+mysql> drop procedure title$$
+ERROR 1305 (42000): PROCEDURE rigved_db.title does not exist
+mysql> drop procedure title;$$
+ERROR 1305 (42000): PROCEDURE rigved_db.title does not exist
+mysql> create procedure title(IN userid int)
+    -> begin
+    -> declare n varchar(20);
+    -> declare g varchar(10);
+    -> select Name into n from person where id=userid;
+    -> select Gender into g from person where id=userid;
+    -> if g='Male'
+    -> then update person set Name=concat('Mr.',n)where id=userid;
+    -> else update person set Name=concat('Ms.',n)where id=userid;
+    -> end if;
+    -> end $$
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> call title(10)$$
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from person $$
++----+-----------+--------+
+| Id | Name      | Gender |
++----+-----------+--------+
+| 10 | Mr.Nitesh | Male   |
+| 11 | ashu      | Female |
++----+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> call title(11)$$
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from person $$
++----+-----------+--------+
+| Id | Name      | Gender |
++----+-----------+--------+
+| 10 | Mr.Nitesh | Male   |
+| 11 | Ms.ashu   | Female |
++----+-----------+--------+
+2 rows in set (0.00 sec)
