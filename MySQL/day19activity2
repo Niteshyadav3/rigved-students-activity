@@ -1,0 +1,59 @@
+mysql> use rigved_db
+Database changed
+
+mysql> create table user(userid int(2) primary key,name varchar(15),password varchar(10));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> create table user_history(userid int(2) primary key,name varchar(15),old_password varchar(10),time TIME);
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> select * from user;
+Empty set (0.01 sec)
+
+mysql> select * from user_history;
+Empty set (0.00 sec)
+
+mysql> insert into user values(1, 'alex','alex123');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user values(2, 'bruce','bruce123');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> delimiter $$
+
+mysql> create table user_history(userid int(2) primary key,name varchar(15),old_password varchar(10),time timestamp)$$
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> create trigger update_user_history
+    -> before update on user for each row
+    -> begin
+    -> insert into user_history values(old.userid,old.name,old.password,current_timestamp());
+    -> end;
+    -> $$
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> update user set password = 'alex12345' where userid = 1$$
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from user_history$$
++--------+------+--------------+---------------------+
+| userid | name | old_password | time                |
++--------+------+--------------+---------------------+
+|      1 | alex | alex12345    | 2022-03-17 17:14:36 |
++--------+------+--------------+---------------------+
+1 row in set (0.00 sec)
+
+mysql> update user set password = 'bruce12345' where userid = 2$$
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from user_history$$
++--------+-------+--------------+---------------------+
+| userid | name  | old_password | time                |
++--------+-------+--------------+---------------------+
+|      1 | alex  | ale12345     | 2022-03-19 19:14:36 |
+|      2 | bruce | bruce12345   | 2022-03-19 19:15:33 |
++--------+-------+--------------+---------------------+
+2 rows in set (0.00 sec)
+
