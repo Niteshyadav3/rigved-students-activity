@@ -1,0 +1,98 @@
+
+
+C:\Users\Lenovo>set path=C:\Users\Lenovo\Downloads\mongodb-windows-x86_64-5.0.6\mongodb-win32-x86_64-windows-5.0.6\bin;%path%
+
+C:\Users\Lenovo>mongo
+MongoDB shell version v5.0.6
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("976eabb7-5f58-4d6f-a0ef-cdbe9b7c9c23") }
+MongoDB server version: 5.0.6
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting:
+        2022-03-21T15:57:23.668+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2022-03-21T15:57:23.669+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydb    0.000GB
+> use mydb;
+switched to db mydb
+> db.createCollection('myCollection');
+{
+        "ok" : 0,
+        "errmsg" : "Collection already exists. NS: mydb.myCollection",
+        "code" : 48,
+        "codeName" : "NamespaceExists"
+}
+> db.createCollection('employee');
+{ "ok" : 1 }
+> show collection;
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1211:11
+shellHelper@src/mongo/shell/utils.js:838:15
+@(shellhelp2):1:1
+
+> db.createCollection('employee1')
+{ "ok" : 1 }
+> db.createCollection('EMPLOYEE1')
+{ "ok" : 1 }
+
+> db.employee1.insertMany([{_id:01,name:'gaurav',password:'gaurav123'},{_id:02,name:'rohit',password:'rohit123'},{_id:03,name:'yash',password:'yash123'}]);
+{ "acknowledged" : true, "insertedIds" : [ 1, 2, 3 ] }
+
+> db.EMPLOYEE1.insertMany([{_id:04,name:'gaurav',password:'gaurav123'},{_id:05,name:'rohit',password:'rohit123'},{_id:06,name:'yash',password:'yash123'}]);
+{ "acknowledged" : true, "insertedIds" : [ 4, 5, 6 ] }
+
+> db.employee1.find({'name':'rohit'});
+{ "_id" : 2, "name" : "rohit", "password" : "rohit123" }
+
+> db.employee1.update({"_id":03},{$set:{'password':'yadav0608'}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employee1.find();
+{ "_id" : 1, "name" : "gaurav", "password" : "gaurav123" }
+{ "_id" : 2, "name" : "rohit", "password" : "rohit123" }
+{ "_id" : 3, "name" : "yash", "password" : "yadav0608" }
+
+
+> db.EMPLOYEE1.find();
+{ "_id" : 4, "name" : "gaurav", "password" : "gaurav123" }
+{ "_id" : 5, "name" : "rohit", "password" : "rohit123" }
+{ "_id" : 6, "name" : "yash", "password" : "yash123" }
+> db.EMPLOYEE1.remove({'_id':6});
+WriteResult({ "nRemoved" : 1 })
+> db.EMPLOYEE1.find();
+{ "_id" : 4, "name" : "gaurav", "password" : "gaurav123" }
+{ "_id" : 5, "name" : "rohit", "password" : "rohit123" }
+
+> db.EMPLOYEE1.drop();
+true
+> db.EMPLOYEE1.find();
+
+> db.employee1.insertMany([{_id:4,name:'rajan',password:'rajan090'}]);
+{ "acknowledged" : true, "insertedIds" : [ 4 ] }
+> db.employee1.find();
+{ "_id" : 1, "name" : "gaurav", "password" : "gaurav123" }
+{ "_id" : 2, "name" : "rohit", "password" : "rohit123" }
+{ "_id" : 3, "name" : "yash", "password" : "yadav0608" }
+{ "_id" : 4, "name" : "rajan", "password" : "rajan090" }
+>
