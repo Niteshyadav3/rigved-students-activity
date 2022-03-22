@@ -1,0 +1,162 @@
+> show databases;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mydb    0.000GB
+> use mydb;
+switched to db mydb
+> show collection;
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1211:11
+shellHelper@src/mongo/shell/utils.js:838:15
+@(shellhelp2):1:1
+> show collections;
+EMPLOYEE
+employee
+employee1
+myCollection
+> db.createCollection('user')
+{ "ok" : 1 }
+> db.user.insertMany([{_id:10,name:'alex',age:23},
+... {_id:20,name:'archu',age:23},
+... {_id:30,name:'vandana',age:22},
+... {_id:40,name:'nitesh',age:24},
+... {_id:50,name:'aman',age:25}]);
+{ "acknowledged" : true, "insertedIds" : [ 10, 20, 30, 40, 50 ] }
+> db.user.find();
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({$or:[{age:23},{'name':'aman'}]});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$gt:23}});
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({$or:[{age:{$gt:23}},{'name':'aman'}]});
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({$or:[{age::23},{'name':'vandana'}]});
+uncaught exception: SyntaxError: expected expression, got ':' :
+@(shell):1:24
+> db.user.find({$or:[{age:23},{'name':'vandana'}]});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+> db.user.find();
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({$and:[{name:'alex'},{age:23}]});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+> db.user.find({$or:[{name:'alex'},{age:23}]});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+> db.user.find();
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$in:[23,22,24]}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+> db.user.find({age:{$it:24}});
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown operator: $it",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.user.find({age:{$lt:24}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+> db.user.find({age:{$lte:24}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+> db.user.find({age:{$in:[23,24]}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+> db.user.find({age:{$in:[23,25]}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$gte:22}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$gte:24}});
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$not:{$gte:23}}});
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+> db.user.find({age:{$not:{$gte:24}}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+> db.user.find({age:{$nin:[23,25]}});
+{ "_id" : 30, "name" : "vandana", "age" : 22 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+> db.user.find({age:{$nin:[22,23]}});
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$exists:true,{$gte:23}}});
+uncaught exception: SyntaxError: expected property name, got '{' :
+@(shell):1:32
+> db.user.find({age:{$exists:true,$gte:23}});
+{ "_id" : 10, "name" : "alex", "age" : 23 }
+{ "_id" : 20, "name" : "archu", "age" : 23 }
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> db.user.find({age:{$exists:true,$gte:24}});
+{ "_id" : 40, "name" : "nitesh", "age" : 24 }
+{ "_id" : 50, "name" : "aman", "age" : 25 }
+> show collections;
+EMPLOYEE
+employee
+employee1
+myCollection
+user
+> db.createCollection('student');
+{ "ok" : 1 }
+> {'_id':'item_id','sequence_value':0}
+
+> db.student.insert({'_id':'item_id','sequence_value':0});
+WriteResult({ "nInserted" : 1 })
+
+> function getValueForNextSequence(sequenceOfName){
+... var sequenceDoc=db.student.findAndModify({
+... query:{_id:sequenceOfName},
+... update:{$inc:{sequence_value:1}},
+... new:true
+... });
+... return sequenceDoc.sequence_value;
+... }
+
+> db.STORE.insert({ '_id':getValueForNextSequence('item_id'), 'name':'gaurav', 'age':'23' })
+WriteResult({ "nInserted" : 1 })
+> db.STORE.insert({ '_id':getValueForNextSequence('item_id'), 'name':'rohit', 'age':'22' })
+WriteResult({ "nInserted" : 1 })
+> db.STORE.insert({ '_id':getValueForNextSequence('item_id'), 'name':'yash', 'age':'24' })
+WriteResult({ "nInserted" : 1 })
+> db.STORE.insert({ '_id':getValueForNextSequence('item_id'), 'name':'sandesh', 'age':'23' })
+WriteResult({ "nInserted" : 1 })
+> db.STORE.find();
+{ "_id" : 3, "name" : "gaurav", "age" : "23" }
+{ "_id" : 4, "name" : "rohit", "age" : "22" }
+{ "_id" : 5, "name" : "yash", "age" : "24" }
+{ "_id" : 6, "name" : "sandesh", "age" : "23" }
+> db.createCollection('student')
