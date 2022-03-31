@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Client using Socket IO</h2>
+    <!--it must use socket.io library,
+    this is present in node_modules/socket.io/client-dist/socket.io.js-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        let socket=io();//tries to connect to the server
+        socket.emit("msg","Hello I am client");//sends the data to the server
+        //on(key,callback)will receive the data from the server
+        socket.on("obj",(data)=>{
+            console.log(data);
+        });
+    </script>
+</body>
+</html>
