@@ -1,0 +1,15 @@
+<div>
+<table style="border:2px solid black;border-spacing: 15px;">
+    <thead>
+        <tr>
+            <td>Name</td><td>gender</td><td></td><td>Name</td>
+        </tr>
+    </thead>
+    <tbody *ngFor="let i of user">
+       <td>{{i.name |  i.gender}}</td>
+       <td>{{i.gender}}</td>
+       <td>{{i.address.state}}</td>
+       <td>{{i.address.city}}</td>
+    </tbody>
+</table>
+</div>

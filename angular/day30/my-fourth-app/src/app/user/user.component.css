@@ -1,0 +1,33 @@
+h2{
+    padding:0.2em;
+    background: linear-gradient(315deg, #677086, #7a8397);
+    border-radius: 50px;
+    box-shadow:  -20px -20px 60px #a15858,
+                 20px 20px 60px #969aa5;
+                 width: fit-content;
+}
+.container{
+    padding: 0.5em;
+    background: linear-gradient(315deg, #364468, #91959c);
+    border-radius: 50px;
+    box-shadow:  -20px -20px 60px #fa1010,
+                 20px 20px 60px #8aa3d4;
+                 width: 500px;
+                 height: 500px;
+}
+div > table{
+    padding: 1em ;
+    border-radius: 50px;
+    background: linear-gradient(315deg, #f0eaea, #926868);
+    box-shadow:  -20px -20px 60px #3e2e96,
+                 20px 20px 60px #2d2ba6;
+                 
+}
+th,td {
+    padding: 1em ;
+    border-radius: 20px;
+    background: linear-gradient(315deg, #e0d8d8, #524f4f);
+    box-shadow:  -20px -20px 60px #dd3d3d,
+                 20px 20px 60px #140b0b;
+                 
+}
