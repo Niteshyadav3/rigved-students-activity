@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserDemoComponent } from './user.component';
+import { PropertyBindingComponent } from './property-binding.component';
 
-describe('UserDemoComponent', () => {
-  let component: UserDemoComponent;
-  let fixture: ComponentFixture<UserDemoComponent>;
+describe('PropertyBindingComponent', () => {
+  let component: PropertyBindingComponent;
+  let fixture: ComponentFixture<PropertyBindingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserDemoComponent ]
+      declarations: [ PropertyBindingComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserDemoComponent);
+    fixture = TestBed.createComponent(PropertyBindingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -7,7 +7,7 @@ import { FirstComponent } from './first/first.component';
 import { PipeDemoComponent } from './pipe-demo/pipe-demo.component';
 import { StructuralDemoComponent } from './structural-demo/structural-demo.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { UserDemoComponent } from './user-demo/user-demo.component';
+import { UserDemoComponent } from './user/user.component';
 
 @NgModule({
   declarations: [

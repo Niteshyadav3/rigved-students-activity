@@ -11,7 +11,7 @@ export class UserDemoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  user-demo = [
+  user = [
     {name : "Alex", gender : "male", address: {state: "KA", city : "BLR"}},
     {name : "Jennifer", gender : "female", address: {state: "MH", city : "MBI"}},
     {name : "Bruce", gender : "male", address: {state: "MH", city : "MBI"}},
