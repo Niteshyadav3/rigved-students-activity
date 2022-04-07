@@ -1,0 +1,5 @@
+<div>
+    <h1>Cart Size: {{quantity}}</h1>
+    <h1>Total Amount: {{price}}</h1>
+    <app-activity-child (data)="quantity=$event" (price1)="price = $event"></app-activity-child>
+</div>
