@@ -1,0 +1,19 @@
+<div>
+    <h2>Student marks</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>RollNo</th><th>Name</th><th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+           <tr *ngFor="let student of students" [ngClass]="{'p':student.marks>40,'f':student.marks < 40,'a':student.marks==40}"[class.w]="apply">
+            <td>{{student.rollno}}</td><td>{{student.Name}}</td><td>{{student.marks}}</td>
+           </tr>
+
+           <tr>
+               <td><div class="fail"></div>:Fail<div class="pass"></div>:pass<div class="equal"></div></td>
+           </tr>
+        </tbody>
+    </table>
+</div>

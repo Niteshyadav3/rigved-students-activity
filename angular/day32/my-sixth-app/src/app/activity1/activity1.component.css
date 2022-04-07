@@ -1,0 +1,29 @@
+html{
+    height:100%
+}
+.p{
+    background-color: green;
+}
+.f{
+    background-color: red;
+}
+.a{
+    background-color: green;
+}
+.name{
+    color: white;
+}
+.fail{
+    border:2;
+    background-color: red;
+    height: 30px;
+    width: 30px;
+    display: inline-table;
+}
+.pass{
+    border:2;
+    background-color: green;
+    height: 30px;
+    width: 30px;
+    display: inline-table; 
+}
