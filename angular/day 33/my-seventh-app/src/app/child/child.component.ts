@@ -13,7 +13,7 @@ export class ChildComponent implements OnInit {
   }
    //<app-child [name] = "parentProperty">
    @Input()
-   name:string | undefined = undefined;
+   name : string | undefined = undefined;
 
    //<app-child (data) = "parentProperty =$event">
    @Output()
