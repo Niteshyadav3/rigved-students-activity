@@ -1,0 +1,19 @@
+<div>
+    <h2>FormControl</h2>
+    <label>
+        Username:<input [formControl] = "username">
+    </label>
+    <br>
+    <label>
+        Lastname:<input [formControl] = "lastname">
+    </label>
+    <hr />
+    
+    <div>
+        Value:{{username.value}}
+    </div>
+    <div>
+        Value:{{lastname.value}}
+    </div>
+
+</div>
