@@ -1,0 +1,35 @@
+
+<form [formGroup]= "FormDetail" (ngSubmit)="handleSubmit()">
+         <h2>Form Builder Demo</h2>
+    <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input type="text" id="firstname" formControlName="firstname" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input type="text" id="lastname" formControlName="lastname" class="form-control">
+    </div>
+         
+    <div formGroupName="address" >
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" formControlName="state" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" formControlName="city" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pin">Pin</label>
+            <input type="text" id="pin" formControlName="pin" class="form-control">
+        </div>
+        <div class="form-group">
+        <button class="button" type="submit" class="btn btn-success">Submit</button>
+        </div>
+        <div>
+            FormDetail:{{FormDetail.value | json}}
+        </div>
+    </div>
+</form>
+
+ 

@@ -1,0 +1,56 @@
+<form [formGroup]= "form" (ngSubmit)="handleSubmit()" class="form-control">
+    <h2>Form Builder Demo</h2>
+<div formGroupName="name" >
+    <div class="form-group">
+   <label for="firstname">
+      Firstname: <input type="text" id="firstname" formControlName="firstname" placeholder="First name">
+    </label>
+    <span [hidden]="first.valid || first.pristine" class="text-danger">
+    firstname is required
+    </span>
+    </div>
+</div>
+<div class="form-group">
+   <label for="lastname">
+      Lastname:<input type="text" id="lastname" formControlName="lastname" placeholder="Last name">
+   </label>
+   <span [hidden]="last.valid || last.pristine" class="text-danger">
+    lastname is required
+   </span>
+</div>
+    
+<div formGroupName="address" >
+    <label for="address">Address</label><br>
+   
+       <label for="state">State
+       <input type="text" id="state" formControlName="state" placeholder="Mah">
+       </label>
+        <span [hidden]="address.valid || address.pristine" class="text-danger">
+        state is required
+        </span>
+        <br> 
+   
+   
+       <label for="city">City
+       <input type="text" id="city" formControlName="city" placeholder="Mum">
+       </label>
+       <span [hidden]="address.valid || address.pristine" class="text-danger">
+        City is required
+       </span><br>
+   
+   
+       <label for="pin">Pin
+       <input type="text" id="pin" formControlName="pin" placeholder="400054">
+       </label>
+       <span [hidden]="address.valid || address.pristine" class="text-danger">
+        minimum length is 6
+    </span>
+</div><br>
+  <button class="button" type="submit" class="btn btn-success">Submit</button>
+   <br>
+   <button (click)="setPreset()" btn btn-successs>Preset</button>
+   
+   
+</form>
+
+
