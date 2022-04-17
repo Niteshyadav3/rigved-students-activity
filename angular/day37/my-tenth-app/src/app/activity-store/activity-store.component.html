@@ -1,0 +1,45 @@
+<div class ="container-fluid">
+    <h3>User Store Form</h3>
+ 
+    <form [formGroup] = "userForm" (ngSubmit) = "saveForm()">
+        <div>
+            User Id: <input type = "number" formControlName = "userId" class="form-control">
+        </div>
+        <div>
+            Name: <input type = "text" formControlName = "name" class="form-control">
+        </div>
+        <div>
+            Dob: <input type = "date" formControlName = "dob" class="form-control">
+        </div>
+        <div>
+            Gender: <input type = "text" formControlName = "gender" class="form-control">
+        </div>
+        <div>
+            Phone: <input type = "number" formControlName = "phone" class="form-control">
+        </div>
+        <div>
+            E-mail: <input type = "text" formControlName = "email" class="form-control">
+        </div>
+        <div formGroupName="address" >
+            <div class="form-group">
+               State:<input type="text" formControlName="state" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                City:
+                <input type="text" formControlName="city" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                Pin:
+                <input type="text" formControlName="pin" class="form-control">
+            </div>
+
+        <div>
+            <input type = "submit" value = "submit">
+         </div>
+    </div>
+   <form>
+
+
+
