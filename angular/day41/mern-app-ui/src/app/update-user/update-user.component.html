@@ -1,0 +1,15 @@
+<div>
+    <h3>Update User</h3>
+    <div>
+        Id:<input type="number" [formControl]="id">
+    </div>
+    <div>
+        Age:<input type="number" [formControl]="age">
+    </div>
+    <br>
+    <input type="submit" value="Update" (click)="handleUpdate()">
+    <div>
+        <p *ngIf="out">{{out | json}}</p>
+    </div>
+</div>
+
